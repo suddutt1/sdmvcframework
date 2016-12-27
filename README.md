@@ -7,6 +7,7 @@ The default application uses framework using the following technologies.
 1. BS4 & JQuery based view 
 
 Features 
+
 1. Supports view rendering using JSP
 2. Render less HTML files
 3. Future ( Velocity based templates) 
