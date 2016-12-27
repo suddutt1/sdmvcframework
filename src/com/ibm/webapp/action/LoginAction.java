@@ -37,4 +37,12 @@ public class LoginAction implements WebActionHandler {
 		
 		return mvObj;
 	}
+	@RequestMapping("logout.wss")
+	public ModelAndView logout(HttpServletRequest request,
+			HttpServletResponse response) {
+		request.getSession().invalidate();
+		ModelAndView mvObj = new ModelAndView(ViewType.GENERIC_NO_RENDER_VIEW,"text/html");
+		mvObj.setView("index.html");
+		return mvObj;
+	}
 }

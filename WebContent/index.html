@@ -1,17 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+  	<title>Generic Web Application</title>
     <!-- Required meta tags always come first -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap.min.css" >
+    <link rel="stylesheet" href="css/app.css" >
   </head>
   <body>
-    <h1>Launch Application</h1>
-
+  			<nav class="navbar navbar-dark bg-inverse navbar-full navbar-fixed-top">
+  			<a class="navbar-brand" href="#">Generic Web Application</a>
+			<button class="navbar-toggler hidden-sm-up float-xs-right" type="button"
+				data-toggle="collapse" data-target="#navbar-header"
+				aria-controls="navbar-header" aria-expanded="false"
+				aria-label="Toggle navigation"></button>
+			<div class="collapse navbar-toggleable-xs" id="navbar-header">
+				<ul class="nav navbar-nav float-xs-right">
+					<li class="nav-item"><a class="nav-link" href="#">Home
+					</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Dashboard</a></li>
+					<li class="nav-item"><a class="nav-link" href="weatherhome.wss">Administration</a>
+					</li>
+					<li class="nav-item"><button class="btn btn-outline-info">Sign up</button>
+					</li>
+					<li class="nav-item"><button class="btn btn-primary">Login</button>
+					</li>
+					
+				</ul>
+			</div>
+		</nav>
+		<!-- /navbar -->
+		<div class="container-fluid">
+			<div class="jumbotron">
+			  <h3 class="display-5">Generic Application Home Page</h3>
+			  <p class="lead">This is a text with the description of application </p>
+			  
+			  <p class="lead">Use Log in or Sign up to start using the application</p>
+			  <p class="lead">
+			    <a class="btn btn-primary btn-lg" href="loadLogin.wss" role="button">Login</a>
+			    <a class="btn btn-warning btn-lg" href="#" role="button">Sign up</a>
+			  </p>
+			</div>
+  		</div>
+		
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script src="js/jquery-3.1.1.min.js" ></script>
     <script src="js/tether.min.js" ></script>
