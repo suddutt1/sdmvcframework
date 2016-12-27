@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+	<display-name>GenericAppWeb</display-name>
+	
+	<servlet>
+		<servlet-name>MobileFrameworkDispatcher</servlet-name>
+		<servlet-class>com.ibm.app.web.frmwk.MobileFrameworkDispatcher</servlet-class>
+		<init-param>
+			<param-name>applicationConfigLocation</param-name>
+			<param-value>/WEB-INF/frmwkconfig.properties</param-value>
+		</init-param>
+		<init-param>
+			<param-name>secureModelAction</param-name>
+			<param-value>_get_last_model_data.wss</param-value>
+		</init-param>
+		<load-on-startup>0</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MobileFrameworkDispatcher</servlet-name>
+		<url-pattern>*.wss</url-pattern>
+	</servlet-mapping>
+	<filter>
+		<filter-name>LoginFilter</filter-name>
+		<filter-class>com.ibm.app.web.frmwk.Loginfilter</filter-class>
+		<init-param>
+			<description>Enable login</description>
+			<param-name>enableLogin</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<description>.wss path for login. Filter will have special access for that</description>
+			<param-name>loginAction</param-name>
+			<param-value>login.wss</param-value>
+		</init-param>
+		<init-param>
+			<description>Login page jsp/view name</description>
+			<param-name>loginPage</param-name>
+			<param-value>login.html</param-value>
+		</init-param>
+		<init-param>
+			<description>Authentication token attribute. To be set to a not null string after the successful authentication</description>
+			<param-name>authTokenAttribute</param-name>
+			<param-value>auth_token</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>LoginFilter</filter-name>
+		<url-pattern>*.wss</url-pattern>
+	</filter-mapping>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+</web-app>
