@@ -2,3 +2,14 @@
 body{
 	padding-top: 50px;
 }
+@media (max-width: 546px){
+	.app-title {font-size: 0.8em} 
+}
+// Medium devices (tablets, 768px and up)
+//@media (min-width: 546px) { app-title {font-size: 1.0em;color:#ff0000} }
+.canvas {
+	padding:2%;
+	background-color:#eceeef;
+	border-radius: 5px;
+	border: 2px solid #eceeef;
+}

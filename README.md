@@ -5,6 +5,8 @@
 The default application uses framework using the following technologies. 
 
 1. BS4 & JQuery based view 
+2. Added Mongo driver 3.4.1 ( For download refer to pom.xml dependencies) 
+
 
 Features 
 

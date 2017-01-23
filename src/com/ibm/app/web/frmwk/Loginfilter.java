@@ -1,6 +1,8 @@
 package com.ibm.app.web.frmwk;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -19,11 +21,15 @@ public class Loginfilter implements Filter {
 	private static final String _LOGIN_ACTION_PATH_PROP = "loginAction";
 	private static final String _LOGIN_PAGE_PROP = "loginPage";
 	private static final String _AUTH_TOKEN_ATTR_PROP = "authTokenAttribute";
+	private static final String _BYPASS_LOGIN_ACTION = "bypassLoginActions";
+	
 
 	private boolean enableLogin = true;
 	private String loginPath = "login.wss";
 	private String loginPage = "login.jsp";
 	private String authToken = "user_role";
+	private Map<String,String> byPassLoginActionMap = new HashMap<String, String>();
+	
 
 	/**
 	 * Default constructor.
@@ -62,7 +68,8 @@ public class Loginfilter implements Filter {
 					String requestURI = servletReq.getRequestURI();
 					int position = requestURI.lastIndexOf("/");
 					String actionName = requestURI.substring(position + 1);
-					if (actionName.equalsIgnoreCase(this.loginPath)) {
+					if (actionName.equalsIgnoreCase(this.loginPath)
+							|| this.byPassLoginActionMap.containsKey(actionName)) {
 						chain.doFilter(request, response);
 						redirectToLoginPage = false;
 					}
@@ -80,22 +87,35 @@ public class Loginfilter implements Filter {
 	 * @see Filter#init(FilterConfig)
 	 */
 	public void init(FilterConfig fConfig) throws ServletException {
-		// TODO Auto-generated method stub
+
+		String byLoginActionList = fConfig
+				.getInitParameter(_BYPASS_LOGIN_ACTION);
+		if (byLoginActionList != null && byLoginActionList.trim().length() > 0) {
+			String[] actionList = byLoginActionList.trim().split(",");
+			if(actionList!=null)
+			{
+				for(String action: actionList)
+				{
+					this.byPassLoginActionMap.put(action,action);
+				}
+			}
+		}
 		String enableProp = fConfig.getInitParameter(_ENABLE_LOGIN_PROP);
 		if (enableProp != null && enableProp.trim().equalsIgnoreCase("FALSE")) {
 			this.enableLogin = false;
 		}
 		String loginUri = fConfig.getInitParameter(_LOGIN_ACTION_PATH_PROP);
 		if (loginUri != null && loginUri.trim().length() > 0) {
-			this.loginPath= loginUri.trim();
+			this.loginPath = loginUri.trim();
 		}
 		String loginPageName = fConfig.getInitParameter(_LOGIN_PAGE_PROP);
 		if (loginPageName != null && loginPageName.trim().length() > 0) {
-			this.loginPage= loginPageName.trim();
+			this.loginPage = loginPageName.trim();
 		}
-		String autheTokenValue = fConfig.getInitParameter(_AUTH_TOKEN_ATTR_PROP);
+		String autheTokenValue = fConfig
+				.getInitParameter(_AUTH_TOKEN_ATTR_PROP);
 		if (autheTokenValue != null && autheTokenValue.trim().length() > 0) {
-			this.authToken= autheTokenValue.trim();
+			this.authToken = autheTokenValue.trim();
 		}
 
 	}

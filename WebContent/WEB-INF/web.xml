@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app id="WebApp_ID" version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 	<display-name>GenericAppWeb</display-name>
-	
 	<servlet>
 		<servlet-name>MobileFrameworkDispatcher</servlet-name>
 		<servlet-class>com.ibm.app.web.frmwk.MobileFrameworkDispatcher</servlet-class>
@@ -13,7 +12,7 @@
 			<param-name>secureModelAction</param-name>
 			<param-value>_get_last_model_data.wss</param-value>
 		</init-param>
-		<load-on-startup>0</load-on-startup>
+		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>MobileFrameworkDispatcher</servlet-name>
@@ -42,6 +41,11 @@
 			<param-name>authTokenAttribute</param-name>
 			<param-value>auth_token</param-value>
 		</init-param>
+		<init-param>
+			<description>Action paths to bypass any authentication.Should be comma separated </description>
+			<param-name>bypassLoginActions</param-name>
+			<param-value>_get_last_model_data.wss</param-value>
+		</init-param>
 	</filter>
 	<filter-mapping>
 		<filter-name>LoginFilter</filter-name>
@@ -50,4 +54,31 @@
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
+	<servlet>
+		<description>
+			Config Servlet to handle configuration related information
+		</description>
+		<display-name>ConfigServlet</display-name>
+		<icon>
+			<small-icon />
+			<large-icon />
+		</icon>
+		<servlet-name>ConfigServlet</servlet-name>
+		<servlet-class>com.ibm.app.web.frmwk.ConfigServlet</servlet-class>
+		<init-param>
+			<description>Properties related to mongodb</description>
+			<param-name>MONGO_PROP</param-name>
+			<param-value>/WEB-INF/mongodb.properties</param-value>
+		</init-param>
+		<init-param>
+			<description>Properties related to application</description>
+			<param-name>APP_PROPS</param-name>
+			<param-value>/WEB-INF/application.properties</param-value>
+		</init-param>
+		<load-on-startup>0</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ConfigServlet</servlet-name>
+		<url-pattern>*.config</url-pattern>
+	</servlet-mapping>
 </web-app>

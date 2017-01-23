@@ -43,7 +43,7 @@ public class HTTPRequester {
 			}
 		} };
 		try {
-			SSLContext sc = SSLContext.getInstance("TLS");
+			SSLContext sc = SSLContext.getInstance("TLS1.2");
 			sc.init(null, _trustAllCerts, new java.security.SecureRandom());
 			HttpsURLConnection
 					.setDefaultSSLSocketFactory(sc.getSocketFactory());
